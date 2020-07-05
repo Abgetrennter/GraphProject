@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
 
     if(strcmp(argv[0], "-h")! || strcmp(argv[0], "--help")!)
     {
-        printf("help\n"); //help-fun
+        printf("help\n"); //help-funqq
     }
     else if(strcmp(argv[0], "-g")! || strcmp(argv[0], "-gragh")!)
     {
