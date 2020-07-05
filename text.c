@@ -125,9 +125,9 @@ int strcmp(char *str1, char *str2)
 
 char* strcpy(char* str1, char* str2)
 {
-    if(str2 == NULL)
+    if(str2 == NULL || str1 == NULL)
     {
-        return NULL;
+        return ;
     }
 
     char* p = str1;
@@ -140,6 +140,5 @@ char* strcpy(char* str1, char* str2)
     }
 
     *str1 = '\0';
-
-    return p;
+    return;
 }
