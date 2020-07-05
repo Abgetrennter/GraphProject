@@ -95,3 +95,51 @@ void print_help(void) {
     printf("SEARCH_PARAMS 'garlic' is the shortest path from the starting point u to the end point V in the graph of the input file\n");
     printf("-------------------------------That all--------------------------------------------------\n");
 }
+
+int strcmp(char *str1, char *str2)
+{
+    char *p = str1;
+    char *q = str2;
+
+    if((NULL == p) || (NULL == q))
+    {
+        return 0;
+    }
+
+    while(*p != '\0' && *q != '\0')
+    {
+        if(*p == *q)
+        {
+            p++;
+            q++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return (*p - *q);
+
+}
+
+char* strcpy(char* str1, char* str2)
+{
+    if(str2 == NULL)
+    {
+        return NULL;
+    }
+
+    char* p = str1;
+
+    while(*str2 != '\0')
+    {
+        *str1 = *str2;
+        str1++;
+        str2++;
+    }
+
+    *str1 = '\0';
+
+    return p;
+}
