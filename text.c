@@ -85,13 +85,13 @@ void print_st(void) {
 
 void print_help(void) {
     printf("-----------------------------help---------------------------------------------------------\n");
-    printf(" -h/--help \n显示帮助菜单\n\n");
-    printf("-g/--graph FILE_PATH -s/--stats STATS_PARAMS \n显示以 `FILE_PATH` 为输入文件的图的统计信息，输出没有格式要求，具体支持的`STATS_PARAMS`参数如下：\n");
-    printf("edges 边数\n");
-    printf("vertices 点数\n");
-    printf("freeman freeman度\n");
-    printf("closeness node closeness点 e.g.. closeness 146\n\n");
+    printf(" -h/--help\nShow help menu \n\n");
+    printf("-g/--graph FILE_PATH -s/--stats STATS_PARAMS \nThe statistics of graphs with 'FILE_PATH' as input file are displayed. The output has no formatting requirements. The specific supported 'STATS_PARAMS' parameters are as follows:\n");
+    printf("edges \n");
+    printf("vertices \n");
+    printf("freeman \n");
+    printf("closeness node  e.g.. closeness 146\n\n");
     printf("-g/--graph FILE_PATH -sp/--shortestpath SEARCH_PARAMS -u STARTING_POINT -v TARGET_POINT\n");
-    printf("为输入文件的图中 从开始点 u 到 终点 v 的用  SEARCH_PARAMS 蒜出来的最短路径\n");
+    printf("SEARCH_PARAMS 'garlic' is the shortest path from the starting point u to the end point V in the graph of the input file\n");
     printf("-------------------------------That all--------------------------------------------------\n");
 }
