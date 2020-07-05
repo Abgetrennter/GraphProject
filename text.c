@@ -96,7 +96,7 @@ void print_help(void) {
     printf("-------------------------------That all--------------------------------------------------\n");
 }
 
-int strcmp(char *str1, char *str2)
+int strcmps(char *str1, char *str2)
 {
     char *p = str1;
     char *q = str2;
@@ -123,7 +123,7 @@ int strcmp(char *str1, char *str2)
 
 }
 
-char* strcpy(char* str1, char* str2)
+char* strcpys(char* str1, char* str2)
 {
     if(str2 == NULL || str1 == NULL)
     {
