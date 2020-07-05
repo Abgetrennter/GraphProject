@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 
     if(!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
     {
-        printf("help\n"); //help-fun
+        print_help(); //help-fun
     }
     else if(!strcmp(argv[1], "-g") || !strcmp(argv[1], "-gragh"))
     {

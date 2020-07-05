@@ -14,5 +14,5 @@ text.o: text.c
 	gcc -c text.c
 
 clean:
-	rm search-cli main.o search.o stats.o text.o
+	rm search-cli.exe search-cli.out main.o search.o stats.o text.o
 
