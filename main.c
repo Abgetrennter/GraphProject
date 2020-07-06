@@ -36,13 +36,6 @@ int main(int argc, char const *argv[])
             u_to_v.u = atoi(argv[6]);
             u_to_v.v = atoi(argv[8]);
 
-            //u_to_v.path = shortestpath(u_to_v.u, u_to_v.v, u_to_v.search_path, file_name);
-
-            /*for(int i = 0;; ++i)
-            {
-                /* code
-            } */
-
         } else if(strcmps(argv[3], "-s") == 0 || strcmps(argv[3], "--stats") == 0)
         {
             if(strcmps(argv[4], "edges") == 0)
@@ -53,11 +46,12 @@ int main(int argc, char const *argv[])
                 printf("%d\n", numberOfVertices(file_name));
             } else if(strcmps(argv[4], "freeman") == 0)
             {
-                float q = freemanNetworkCentrality(file_name);
-                printf("%f\n", q);
+                float q ;
+                q = freemanNetworkCentrality(file_name);
             } else if(strcmps(argv[4], "closeness node") == 0)
             {
-                printf("%f\n", closenessCentrality(file_name, argv[6]));
+                float q;
+                //printf("%f\n", closenessCentrality(file_name, argv[6]));
             }
         }
     }

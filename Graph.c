@@ -1,8 +1,6 @@
 #include "Graph.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-AdjGraph *C_UDA_G(char name[], AdjGraph* g) {
+AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
 
     int num1, num2, n, i;
     g = (AdjGraph*)malloc(sizeof(AdjGraph));
@@ -20,37 +18,63 @@ AdjGraph *C_UDA_G(char name[], AdjGraph* g) {
         g->adjlist[i].firstarc = NULL;
     }
 
-    printf("%s\n", "3");
 
     while((fscanf(fp, "%d%d%d", &num1, &num2, &n) != EOF)) {
-        int flag = 1;
-        ArcNode *p, *q, *pn, *qn;
-        q = g->adjlist[num1].firstarc;
-        p = g->adjlist[num2].firstarc;
+        ArcNode *p, *q;
 
-        while(q != NULL) {
-            if(q->adjvex == num2) {
-                flag = 0;
-                break;
-            }
-
-            q = q->nextarc;
-        }
-
-        if(flag == 1) {
+        if(find_re(g, num1, num2)) {
             p = (ArcNode*)malloc(sizeof(ArcNode));
             p->adjvex = num2;
             p->nextarc = g->adjlist[num1].firstarc;
             g->adjlist[num1].firstarc = p;
-            //g->adjlist[num1].data++;
+
 
             q = (ArcNode*)malloc(sizeof(ArcNode));
             q->adjvex = num1;
             q->nextarc = g->adjlist[num2].firstarc;
             g->adjlist[num2].firstarc = q;
-            //g->adjlist[num2].data++;
+
+            g->adjlist[num1].data++;
+            g->adjlist[num2].data++;
         }
     }
 
     return g;
+}
+
+AdjGraph* free_CUG(AdjGraph*g) {
+    int i;
+
+    for(i = 0; i < MAXV; ++i)
+    {
+        ArcNode *p, *q;
+
+        for(p = g->adjlist[i].firstarc; p != NULL;) {
+            q = p;
+            p = p->nextarc;
+
+            free(q);
+        }
+    }
+
+    free(g);
+
+    g = NULL;
+
+    return g;
+}
+
+int find_re(AdjGraph *g, int num1, int num2) {
+    ArcNode *p, *q;
+    q = g->adjlist[num1].firstarc;
+
+    while(q != NULL) {
+        if(q->adjvex == num2) {
+            return 0;
+        }
+
+        q = q->nextarc;
+    }
+
+    return 1;
 }
