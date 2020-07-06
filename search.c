@@ -1,9 +1,11 @@
-/*
 #include "search.h"
+
+
 int visit[MAXV] = {0};
 int g_visited[MAXV] = {0};//ÓÃÓÚ±ê¼Ç¸Ã¶¥µãÊÇ·ñ±»·ÃÎÊ
 int g_path[MAXV];
 int flag = 0;
+
 void DFS(AdjGraph *G, int u, int v, int dpath[], int d) //d???-1;dpath??????
 {
     ArcNode *p;
@@ -40,77 +42,13 @@ void DFS(AdjGraph *G, int u, int v, int dpath[], int d) //d???-1;dpath??????
 
     visit[u] = 0;
 }
-
-char* shortestPath(int u, int v, char algorithm[], char name[])
-{
-    AdjGraph *g;
-    int i;
-    g = create_graph(g, name);
-
-    for(i = 0; i < 410000; i++) {
-        visited[i] = 0;
-    }
-
-    for(i = 0; i < 410000; i++) {
-        dist[i] = 0;
-    }
-
-    for(i = 0; i < 410000; i++) {
-        S[i] = 0;
-    }
-
-    for(i = 0; i < 410000; i++) {
-        pp[i] = 0;
-    }
-
-    char *s;
-    s = (char*)malloc(sizeof(char));
-
-    char algo1[10] = "DFS";
-    char algo2[10] = "BFS";
-    char algo3[10] = "Dijkstra";
-
-    if(cmp(algorithm, algo1) == 0) {
-        Path *p = (Path*)malloc(sizeof(Path));
-        p->d = -1;
-        DFS(g, u, v, p);
-    } else if(cmp(algorithm, algo2) == 0) {
-        BFS(g, u, v);
-    } else if(cmp(algorithm, algo3) == 0) {
-        Path *p = (Path*)malloc(sizeof(Path));
-        p = Dijkstra(g, u, v, p);
-        int i = 0;
-
-        while(p->path[v] != u) {
-            pp[i] = v;
-            v = p->path[v];
-            i++;
-        }
-
-        pp[i++] = v;
-        pp[i] = u;
-
-        while(i > 0) {
-            printf("%d -> ", pp[i]);
-            i--;
-        }
-
-        printf("%d\n", pp[0]);
-        pp[i++] = v;
-        pp[i] = u;
-        int j = 0;
-    }
-
-    return s;
-}
-
 Path *Dijkstra(AdjGraph *g, int u, int v, Path *P)
 {
 
     int i;
 
     for(i = 0; i < 410000; i++) {
-        dist[i] = inf;
+        dist[i] = INF;
     }
 
     S[u] = 1;
@@ -135,7 +73,7 @@ Path *Dijkstra(AdjGraph *g, int u, int v, Path *P)
             continue;
         }
 
-        min = inf;
+        min = INF;
 
         for(j = 0; j < 410000; j++) {
             if(g->adjlist[j].firstarc == NULL) {
@@ -181,14 +119,24 @@ void BFS(AdjGraph *g, int u, int v)
 
         if(w == v) {
             i = front;
+            int a = 0, b;
+            int *apath = (int *)malloc(MAXV * sizeof(int));
 
             while(qu[i].parent != -1) {
                 pp[i] = qu[i].data;
-                printf("%d -> ", qu[i].data);
+                apath[a] = qu[i].data;
+                a++;
                 i = qu[i].parent;
             }
 
-            printf("%d\n", qu[i].data);
+            apath[a] = qu[i].data;
+
+            for(b = a; b > 0; b--) {
+                printf("%d->", apath[b]);
+            }
+
+            printf("%d\n", apath[b]);
+            free(apath);
             return;
         }
 
@@ -207,114 +155,57 @@ void BFS(AdjGraph *g, int u, int v)
     }
 }
 
-/*void Dijkstra(AdjGraph *G, int u, int v)
+char* shortestPath(int u, int v, char algorithm[], char name[])
 {
-    int i, j;
-    //ÁÚ½ÓÁ´±í×ªÎªÁÚ½Ó¾ØÕó
-    MatGraph *g = (MatGraph *)malloc(sizeof(MatGraph));
+    AdjGraph *g;
+    char *s;
+    s = (char*)malloc(MAXV * sizeof(char));
+    int i;
+    g = C_DA_G(name, g);
 
-
-    for(i = 0; i < MAXV; i++) {
-        for(j = 0; j < MAXV; j++) {
-            if(i == j) {
-                g->edges[i][j] = 0;
-            } else {
-                g->edges[i][j] = INF;
-            }
-        }
+    for(i = 0; i < 410000; i++) {
+        visited[i] = 0; dist[i] = 0; S[i] = 0; pp[i] = 0;
     }
 
-    printf("%s\n", "Yes");
-    ArcNode *p;
-
-    for(i = 0; i < G->maxd; i++) {
-        p = G->adjlist[i].firstarc ;
-
-        while(p != NULL) {
-            g.edges[i][p.adjvex] = p.weight ;
-            p = p.nextarc;
-        }
-    } printf("%d %d %d \n", G->up_point , G->edge, G->maxd);
-
-    g.up_point = G->up_point ;
-    g.edge = G->edge ;
-    g.maxd = G->maxd ;
-
-
-    int *dist = (int *)malloc(MAXV * sizeof(int));
-    int *path = (int *)malloc(MAXV * sizeof(int));
-    int *S = (int *)malloc(MAXV * sizeof(int));
-    int MINdis, k;
-
-    for(i = 0; i < g.maxd; i++) {
-        dist[i] = g.edges[u][i];
-        S[i] = 0;
-
-        if(g.edges[u][i] < INF) {
-            path[i] = u;
-        } else {
-            path[i] = -1;
-        }
+    if(strcmp(algorithm, "DFS") == 0 || strcmp(algorithm, "dfs") == 0)
+    {
+        DFS(g, u, v, g_path, 0);
     }
+    else if(strcmp(algorithm, "BFS") == 0 || strcmp(algorithm, "bfs") == 0)
+    {
+        BFS(g, u, v);
+    }
+    else if(strcmp(algorithm, "Dijkstra") == 0)
+    {
+        Path *p = (Path*)malloc(sizeof(Path));
+        p = Dijkstra(g, u, v, p);
+        int i = 0;
 
-    S[u] = 1;
-    path[u] = 0;
-
-    for(i = 0; i < g.maxd - 1; i++) {
-        MINdis = INF;
-
-        for(j = 0; j < g.maxd; j++) {
-            if(S[j] == 0 && dist[j] < MINdis) {
-                k = j;
-                MINdis = dist[j];
-            }
+        while(p->path[v] != u) {
+            pp[i] = v;
+            v = p->path[v];
+            i++;
         }
 
-        S[k] = 1;
+        pp[i++] = v;
+        pp[i] = u;
 
-        for(j = 0; j < g.up_point; j++) {
-            if(S[j] == 0) {
-                if(g.edges[k][j] < INF && dist[k] + g.edges[k][j] < dist[j]) {
-                    dist[j] = dist[k] + g.edges[k][j];
-                    path[j] = k;
-                }
-            }
+        while(i > 0) {
+            printf("%d -> ", pp[i]);
+            i--;
         }
+
+        printf("%d\n", pp[0]);
+        pp[i++] = v;
+        pp[i] = u;
+        int j = 0;
     }
 
-    //Êä³ö
-    int *apath = (int *)malloc(MAXV * sizeof(int));
-    int d;
-    d = 0;
-    apath[d] = v;//ÄæÐò´æ·ÅÂ·¾¶
-    k = path[v];
+    return s;
+}
 
-    while(k != u) {
-        d++;
-        apath[d] = k;
-        k = path[k];
-    }
 
-    d++;
-    apath[d] = u;
-    printf("%s\n", "ok");
-
-    for(j = d; j > 0; j--) {
-        printf("%d->", apath[j]);
-    }
-
-    printf("%d\n", apath[0]);
-
-    //ÊÍ·Å
-    free(g);
-    free(apath);
-    free(dist);
-    free(path);
-    free(S);
-    return;
-}*/
-////////////////////////////////////////////////////////////////////////////////////////////ÒÔÉÏÊÇËâ·¨£¬²Î¿¼Êý¾Ý½á¹¹½Ì²Ä
-char* shortestPath(int u, int v, char algorithm[], char name[]) {}/*
+/*
 {
     AdjGraph *G;
     int i, j, k;
@@ -341,17 +232,7 @@ char* shortestPath(int u, int v, char algorithm[], char name[]) {}/*
 
     printf("\nUsing %s:\n", algorithm);
 
-    if(strcmp(algorithm, "DFS") == 0 || strcmp(algorithm, "dfs") == 0)
-    {
-        DFS(G, u, v, dpath, 0);
-    }
-    else if(strcmp(algorithm, "BFS") == 0 || strcmp(algorithm, "bfs") == 0)
-    {
-    }
-    else if(strcmp(algorithm, "Dijkstra") == 0)
-    {
-        Dijkstra(G, u, v);
-    }
+
 
     return g_path;
 }

@@ -61,8 +61,8 @@ float freemanNetworkCentrality(char name[]) {
     AdjGraph *g;
     g = Creat_Undirect_G(name, g);
 
-    g->edge = numberOfEdges(name);
-    g->up_point = numberOfVertices(name);
+    g->e = numberOfEdges(name);
+    g->n = numberOfVertices(name);
 
     long long max = 0, sum = 0;
 
@@ -96,8 +96,8 @@ float freemanNetworkCentrality(char name[]) {
 
     double f, q;
 
-    f =  1.0 * (sum) / (g->up_point - 1) ;
-    f /= 1.0 * (g->up_point - 2);
+    f =  1.0 * (sum) / (g->n - 1) ;
+    f /= 1.0 * (g->n - 2);
 
     printf("%f\n", (float) f);
 

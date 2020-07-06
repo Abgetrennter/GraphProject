@@ -37,16 +37,16 @@ AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
 
         if(flag == 1) {
             p = (ArcNode*)malloc(sizeof(ArcNode));
+            q = (ArcNode*)malloc(sizeof(ArcNode));
+
             p->adjvex = num2;
             p->nextarc = g->adjlist[num1].firstarc;
             g->adjlist[num1].firstarc = p;
-            //g->adjlist[num1].data++;
 
-            q = (ArcNode*)malloc(sizeof(ArcNode));
             q->adjvex = num1;
             q->nextarc = g->adjlist[num2].firstarc;
             g->adjlist[num2].firstarc = q;
-            //g->adjlist[num2].data++;
+
         }
     }
 
@@ -83,18 +83,8 @@ AdjGraph *C_DA_G(char name[], AdjGraph* g)
         g->adjlist[num1].firstarc = p;
     }
 
-    g->up_point = numberOfEdges(name);
-    //printf("%d\n", g->up_point);
-    g->edge = numberOfVertices(name);
-    //printf("%d\n", g->edge);
-
-    for(i = 0; i < MAXV; i++) {
-        if(i > maxd && g->adjlist[i].firstarc != NULL) {
-            maxd = i;
-        }
-    }
-
-    g->maxd = maxd;
+    g->n = numberOfEdges(name);
+    g->e = numberOfVertices(name);
 
     return g;
 }

@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXV 5000000
+#define MAXV 410000
 #define INF 1000000
 
 typedef struct ANode {
@@ -19,7 +19,7 @@ typedef struct Vnode {
 
 typedef struct {
     VNode adjlist[MAXV];
-    int up_point, edge, maxd;
+    int n, e, maxd;
 } AdjGraph;
 
 typedef struct {
@@ -28,7 +28,7 @@ typedef struct {
 
 typedef struct {
     int edges[MAXV][MAXV];
-    int up_point, edge, maxd;
+    int n, e, maxd;
     int vex[MAXV];
 } MatGraph;
 
