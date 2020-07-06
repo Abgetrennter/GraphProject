@@ -1,18 +1,5 @@
 #include "stats.h"
 
-int cmp(const void* a, const void* b)
-{
-    int* x = (int*)a;
-    int* y = (int*)b;
-
-    if(x[0] != y[0]) {
-        return x[0] - y[0];
-    } else {
-        return x[1] - y[1];
-    }
-}
-
-
 int numberOfEdges(char name[]) {
     int num = 0, n;
     FILE *fp;

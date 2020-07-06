@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define Max_char_size 100
-
 //#include "text.h"
 char file_name[Max_char_size];
 
@@ -35,6 +34,7 @@ int main(int argc, char const *argv[])
             strcpys(u_to_v.way, argv[4]);
             u_to_v.u = atoi(argv[6]);
             u_to_v.v = atoi(argv[8]);
+            shortestPath(u_to_v.u, u_to_v.v, u_to_v.way, file_name);
 
         } else if(strcmps(argv[3], "-s") == 0 || strcmps(argv[3], "--stats") == 0)
         {

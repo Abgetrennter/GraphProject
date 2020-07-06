@@ -3,9 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#define MAXV 1000000
-#define INF 32767
+#define MAXV 400000
+#define INF 1000000
 
 typedef struct ANode {
     int adjvex;
@@ -20,7 +19,7 @@ typedef struct Vnode {
 
 typedef struct {
     VNode adjlist[MAXV];
-    int up_point, edge;
+    int up_point, edge, maxd;
 } AdjGraph;
 
 typedef struct {
@@ -29,15 +28,13 @@ typedef struct {
 
 typedef struct {
     int edges[MAXV][MAXV];
-    int up_point, edge;
-    /*VertexType*/int vex[MAXV];
+    int up_point, edge, maxd;
+    int vex[MAXV];
 } MatGraph;
 
 AdjGraph* C_DA_G(char name[], AdjGraph* g);
 
 AdjGraph* Creat_Undirect_G(char name[], AdjGraph* g);
-
-MatGraph* C_DM_G(char name[], MatGraph* g);
 
 AdjGraph* free_CUG(AdjGraph*g);
 

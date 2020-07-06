@@ -1,5 +1,5 @@
 #include "Graph.h"
-
+#include "stats.h"
 AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
 
     int num1, num2, n, i;
@@ -42,7 +42,54 @@ AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
     return g;
 }
 
-AdjGraph* free_CUG(AdjGraph*g) {
+AdjGraph *C_DA_G(char name[], AdjGraph* g)
+{
+
+    int num1, num2, n, i, maxd = 0;
+    g = (AdjGraph*)malloc(sizeof(AdjGraph));
+    FILE *fp;
+
+    if((fp = fopen(name, "r")) == NULL)
+    {
+        printf("%s\n", "Wrong");
+        exit(2);
+    }
+
+    for(i = 0; i < MAXV; ++i)
+    {
+        g->adjlist[i].data = 0;
+        g->adjlist[i].firstarc = NULL;
+    }
+
+    while((fscanf(fp, "%d%d%d", &num1, &num2, &n) != EOF)) {
+        ArcNode *p;
+        p = (ArcNode*)malloc(sizeof(ArcNode));
+
+        p->adjvex = num2;
+        p->weight = n;
+
+        p->nextarc = g->adjlist[num1].firstarc;
+        g->adjlist[num1].firstarc = p;
+    }
+
+    g->up_point = numberOfEdges(name);
+    //printf("%d\n", g->up_point);
+    g->edge = numberOfVertices(name);
+    //printf("%d\n", g->edge);
+
+    for(i = 0; i < MAXV; i++) {
+        if(i > maxd && g->adjlist[i].firstarc != NULL) {
+            maxd = i;
+        }
+    }
+
+    g->maxd = maxd;
+
+    return g;
+}
+
+
+AdjGraph* free_CUG(AdjGraph * g) {
     int i;
 
     for(i = 0; i < MAXV; ++i)
@@ -64,7 +111,7 @@ AdjGraph* free_CUG(AdjGraph*g) {
     return g;
 }
 
-int find_re(AdjGraph *g, int num1, int num2) {
+int find_re(AdjGraph * g, int num1, int num2) {
     ArcNode *p, *q;
     q = g->adjlist[num1].firstarc;
 

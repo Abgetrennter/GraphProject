@@ -1,22 +1,33 @@
-#ifndef serrch_h
-#define serrch_h
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "Graph.h"
+#include "text.h"
 
-int visited[MAXV] = {0};
+#ifndef _Queue_H_
+#define _Queue_H_
+//ÒÔÏÂ¶¨Òå¶ÓÁÐÏà¹ØÀàÐÍ
+typedef struct {
+    int data[MAXV];
+    int front;
+    int rear;
+    int empty;
+} Queue;
 
-char* shortestPath(int u, int v, char algorithm[], char name[]);
+typedef struct {
+    int weight;
+    int current;
+    int pre;
+} Box;
 
-int visit[MAXV] = {0};//用于DFS标记该顶点是否被访问
-int g_visited[MAXV] = {0};//用于BFS标记该顶点是否被访问
-int g_minnum;//求最短路径中包含的顶点数目
-int g_minlen;//求最短路径长度
-int g_pathmin[MAXV];//存储由u到v的最短路径顶点序号
-int g_dist[MAXV];//记录各顶点到u的距离
-int g_path[MAXV];//记录char类型路径
-int g_temp[MAXV];//记录逆序路径
-Box g_box[MAXV];//记录将边分割为weight-1个顶点后的相对顶点位置
+void enQueue(Queue *qu, int e);//½ø¶Ó
+int deQueue(Queue *qu);//³ö¶Ó
+///////////////////////////////////////////////////////////////////////////////////ÒÔÉÏ¶¼Òª
+#endif          /*_Queue_H_*/
 
-#endif
+#ifndef _SEARCH_H_
+#define _SEARCH_H_
+//void DFS(AdjGraph *G, int u, int v, char dpath[], int d); //Êä³ö¶¥µãuµ½vµÄÒ»ÌõÂ·¾¶
+//void BFS(AdjGraph *G, int u, int v);//Çó¶¥µãuµ½¶¥µãvµÄ×î¶ÌÂ·¾¶
+void Dijkstra(AdjGraph *G, int u, int v);//Çó¶¥µãuµ½¶¥µãvµÄ×î¶ÌÂ·¾¶
+char* shortestPath(int u, int v, char algorithm[], char name[]);//ÒÔ×Ö·û´®ÐÎÊ½·µ»Ø×î¶ÌÂ·¾¶
+#endif         /*_Search_H_*/
