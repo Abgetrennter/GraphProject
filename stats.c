@@ -1,36 +1,6 @@
 #include <stdio.h>
-//#include "Graph.h"
+#include "Graph.h"
 #include <stdlib.h>
-#define MAXV 1000000
-
-typedef struct ANode {
-    int adjvex;
-    struct ANode * nextarc;
-    int weight;
-} ArcNode;
-
-typedef struct Vnode {
-    int data;
-    ArcNode *firstarc;
-} VNode;
-
-typedef struct {
-    VNode adjlist[MAXV];
-    int up_point, edge;
-} AdjGraph;
-
-typedef struct {
-    int no;
-} VertexType;
-
-typedef struct {
-    int edges[MAXV][MAXV];
-    int up_point, edge;
-    /*VertexType*/int vex[MAXV];
-} MatGraph;
-
-
-//#define MAXV 10000000
 
 int cmp(const void* a, const void* b)
 {
@@ -99,56 +69,21 @@ float closenessCentrality(char name[], int node) {
     printf("%s\n", "sorry,we don't choose it.~(￣~￣)~*");
 }
 
-AdjGraph *g;
+
 
 
 float freemanNetworkCentrality(char name[]) {
     int num1, num2, n, i;
-    g = (AdjGraph*)malloc(sizeof(AdjGraph));
-    printf("%s\n", "1");
+    AdjGraph *g;
+    g = C_UDA_G(name, g);
+
+    //if(g == NULL)
+
+
     g->edge = numberOfEdges(name);
     g->up_point = numberOfVertices(name);
-
-    FILE *fp;
-
-    if((fp = fopen(name, "r")) == NULL)
-    {
-        printf("%s\n", "Wrong");
-        exit(2);
-    }
-
-    for(i = 0; i < MAXV; ++i)
-    {
-        g->adjlist[i].data = 0;
-        g->adjlist[i].firstarc = NULL;
-    }
-
-    while((fscanf(fp, "%d%d%d", &num1, &num2, &n) != EOF)) {
-        int flag = 1;
-        ArcNode *p, *q, *s;
-        s = (ArcNode*)malloc(sizeof(ArcNode));
-        q = (ArcNode*)malloc(sizeof(ArcNode));
-        p = (ArcNode*)malloc(sizeof(ArcNode));
-        q = g->adjlist[num1].firstarc;
-
-        while(q != NULL) {
-            if(q->adjvex == num1) {
-                flag = 0;
-                break;
-            }
-
-            q = q->nextarc;
-        }
-
-        if(flag == 1) {
-            s->adjvex = num2;
-            s->nextarc = g->adjlist[num1].firstarc;
-            g->adjlist[num1].firstarc = s;
-            p->adjvex = num1;
-            p->nextarc = g->adjlist[ num2].firstarc;
-            g->adjlist[num2].firstarc = p;
-        }
-    }
+    printf("%s\n", "1");
+    //printf("%s\n", "q");
 
     /*ArcNode *vn;
 
@@ -200,24 +135,39 @@ float freemanNetworkCentrality(char name[]) {
     }
 
     for(i = 0; i < MAXV; i++) {
+        /*if(g->adjlist[i].firstarc == NULL)
+        {
+            continue;
+        }*/
+
         if(g->adjlist[i].data > max)
         {
             max = g->adjlist[i].data;
         }
 
-        sum += g->adjlist[i].data;
+
     }
 
-    //sum = max * g->up_point - sum;
-    //printf("%lld %lld\n", sum, ((g->up_point - 1) * (g->up_point - 2)));
+//sum += g->adjlist[i].data;
+    //  max *= g->up_point;
+
+    for(i = 0; i < MAXV; ++i)
+    {
+        if(g->adjlist[i].data != 0)
+        {
+            sum += max - g->adjlist[i].data;
+        }
+
+    }
+
+
+    //sum = max  - sum;
+    printf("%d %lld %lld\n", max, sum, ((g->up_point - 1) * (g->up_point - 2)));
     double f, q;
     f =  1.0 * (sum) / (g->up_point - 1) ;
     f /= 1.0 * (g->up_point - 2);
-    q = 1.0 * (max * g->up_point) / (g->up_point - 1);
-    q /= 1.0 * (g->up_point - 2);
-    printf("%lf\n", f);
-    return (float)f;
-
+    printf("%f\n", (float) f);
+    return f;
 }
 
 

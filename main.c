@@ -53,7 +53,8 @@ int main(int argc, char const *argv[])
                 printf("%d\n", numberOfVertices(file_name));
             } else if(strcmps(argv[4], "freeman") == 0)
             {
-                printf("%f\n", freemanNetworkCentrality(file_name));
+                float q = freemanNetworkCentrality(file_name);
+                printf("%f\n", q);
             } else if(strcmps(argv[4], "closeness node") == 0)
             {
                 printf("%f\n", closenessCentrality(file_name, argv[6]));
