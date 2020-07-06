@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXV 400000
+#define MAXV 500000
 #define INF 1000000
 
 typedef struct ANode {
@@ -31,6 +31,25 @@ typedef struct {
     int up_point, edge, maxd;
     int vex[MAXV];
 } MatGraph;
+
+typedef struct {
+    int path[410000];
+    int d;
+} Path;
+
+typedef struct {
+    int data;
+    int parent;
+} Queue;
+
+int visited[410000];
+int dist[410000];
+int S[410000];
+int pp[410000];
+Queue qu[410000];
+
+
+
 
 AdjGraph* C_DA_G(char name[], AdjGraph* g);
 
