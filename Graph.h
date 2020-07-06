@@ -33,7 +33,7 @@ typedef struct {
 } MatGraph;
 
 typedef struct {
-    int path[410000];
+    int path[MAXV];
     int d;
 } Path;
 
@@ -42,11 +42,10 @@ typedef struct {
     int parent;
 } Queue;
 
-int visited[410000];
-int dist[410000];
-int S[410000];
-int pp[410000];
-Queue qu[410000];
+int visited[MAXV];
+
+int u_to_vs[MAXV];
+Queue qu[MAXV];
 
 
 

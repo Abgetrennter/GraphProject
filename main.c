@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define Max_char_size 100
-//#include "text.h"
+
 char file_name[Max_char_size];
 
 typedef  struct $
@@ -16,7 +16,6 @@ int main(int argc, char const *argv[])
 {
     int n, c;
 
-    //printf("%s\n", argv[1]);
 
     pointpath u_to_v;
 
@@ -27,7 +26,6 @@ int main(int argc, char const *argv[])
     else if(strcmps(argv[1], "-g")  == 0 || strcmps(argv[1], "-gragh") == 0)
     {
         strcpys(file_name, argv[2]);
-        printf("%s\n", file_name);
 
         if(strcmps(argv[3], "-sp") == 0 || strcmps(argv[3], "--shortestpath") == 0)
         {
@@ -51,7 +49,7 @@ int main(int argc, char const *argv[])
             } else if(strcmps(argv[4], "closeness node") == 0)
             {
                 float q;
-                //printf("%f\n", closenessCentrality(file_name, argv[6]));
+                closenessCentrality(file_name, 0);
             }
         }
     }

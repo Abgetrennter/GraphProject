@@ -17,5 +17,5 @@ Graph.o:Graph.c
 	gcc -c Graph.c
 
 clean:
-	rm search-cli.exe search-cli.out main.o search.o stats.o text.o
+	rm search-cli.exe search-cli.out main.o search.o stats.o text.o Graph.o
 

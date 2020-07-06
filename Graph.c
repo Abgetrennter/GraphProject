@@ -18,7 +18,6 @@ AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
         g->adjlist[i].firstarc = NULL;
     }
 
-    printf("%s\n", "3");
 
     while((fscanf(fp, "%d%d%d", &num1, &num2, &n) != EOF)) {
         int flag = 1;
@@ -85,6 +84,14 @@ AdjGraph *C_DA_G(char name[], AdjGraph* g)
 
     g->n = numberOfEdges(name);
     g->e = numberOfVertices(name);
+
+    for(i = 0; i < MAXV; ++i)
+    {
+        if(g->adjlist[i].firstarc != NULL && i > g->maxd)
+        {
+            g->maxd = i;
+        }
+    }
 
     return g;
 }

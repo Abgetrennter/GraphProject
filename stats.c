@@ -54,6 +54,7 @@ int numberOfVertices(char name[]) {
 
 float closenessCentrality(char name[], int node) {
     printf("%s\n", "sorry,we don't choose it.~(￣~￣)~*");
+    return 0;
 }
 
 float freemanNetworkCentrality(char name[]) {
