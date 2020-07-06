@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXV 500000
+#define MAXV 5000000
 #define INF 1000000
 
 typedef struct ANode {

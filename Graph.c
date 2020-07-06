@@ -18,24 +18,35 @@ AdjGraph *Creat_Undirect_G(char name[], AdjGraph* g) {
         g->adjlist[i].firstarc = NULL;
     }
 
+    printf("%s\n", "3");
 
     while((fscanf(fp, "%d%d%d", &num1, &num2, &n) != EOF)) {
-        ArcNode *p, *q;
+        int flag = 1;
+        ArcNode *p, *q, *pn, *qn;
+        q = g->adjlist[num1].firstarc;
+        p = g->adjlist[num2].firstarc;
 
-        if(find_re(g, num1, num2)) {
+        while(q != NULL) {
+            if(q->adjvex == num2) {
+                flag = 0;
+                break;
+            }
+
+            q = q->nextarc;
+        }
+
+        if(flag == 1) {
             p = (ArcNode*)malloc(sizeof(ArcNode));
             p->adjvex = num2;
             p->nextarc = g->adjlist[num1].firstarc;
             g->adjlist[num1].firstarc = p;
-
+            //g->adjlist[num1].data++;
 
             q = (ArcNode*)malloc(sizeof(ArcNode));
             q->adjvex = num1;
             q->nextarc = g->adjlist[num2].firstarc;
             g->adjlist[num2].firstarc = q;
-
-            g->adjlist[num1].data++;
-            g->adjlist[num2].data++;
+            //g->adjlist[num2].data++;
         }
     }
 

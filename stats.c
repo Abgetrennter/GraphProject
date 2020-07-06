@@ -1,4 +1,6 @@
-#include "stats.h"
+#include <stdio.h>
+#include "Graph.h"
+#include <stdlib.h>
 
 int numberOfEdges(char name[]) {
     int num = 0, n;
@@ -54,9 +56,6 @@ float closenessCentrality(char name[], int node) {
     printf("%s\n", "sorry,we don't choose it.~(￣~￣)~*");
 }
 
-
-
-
 float freemanNetworkCentrality(char name[]) {
     int num1, num2, n, i;
     AdjGraph *g;
@@ -65,8 +64,17 @@ float freemanNetworkCentrality(char name[]) {
     g->edge = numberOfEdges(name);
     g->up_point = numberOfVertices(name);
 
-
     long long max = 0, sum = 0;
+
+    for(i = 0; i < MAXV; i++) {
+        ArcNode *vn;
+
+        for(vn = g->adjlist[i].firstarc; vn != NULL; vn = vn->nextarc)
+        {
+            g->adjlist[i].data++;
+
+        }
+    }
 
     for(i = 0; i < MAXV; i++) {
 
@@ -84,22 +92,17 @@ float freemanNetworkCentrality(char name[]) {
         {
             sum += max - g->adjlist[i].data;
         }
-
     }
 
-    //printf("%d %lld %lld\n", max, sum, ((g->up_point - 1) * (g->up_point - 2)));
+    double f, q;
 
-    double f;
-    float q;
-
-    f =  1.0 * (sum) / (g->up_point - 1);
+    f =  1.0 * (sum) / (g->up_point - 1) ;
     f /= 1.0 * (g->up_point - 2);
 
     printf("%f\n", (float) f);
 
-    q = f;
-
-    free_CUG(g);
-
-    return q;
+    return f;
 }
+
+
+
